@@ -8,6 +8,20 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_USER: homestead
+          MYSQL_PASSWORD: secret
+          MYSQL_DATABASE: homestead
+          MYSQL_ROOT_PASSWORD: root
+          DB_PORT: ${{ job.services.mysql.ports[3306] }}
+        ports:
+          - 33306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
     steps:
       - uses: actions/checkout@v2
       
@@ -26,16 +40,8 @@ jobs:
           npm install
           npm run build
           
-      - uses: mirromutth/mysql-action@v1.1
-        with:
-          mysql version: '8.0' 
-          mysql database: 'homestead' 
-          mysql root password: '123'
-          mysql user: 'homestead'
-          mysql password: 'secret'
-
       - name: Run migrations
         run: |
-          ln -f -s .env.workflow .env
+          php -r "file_exists('.env') || copy('.env.workflow', '.env');"
           php artisan migrate --no-interaction
           php artisan key:generate
