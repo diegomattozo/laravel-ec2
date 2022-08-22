@@ -2,7 +2,7 @@ APP_ENV=local
 APP_KEY=ksjlfjaksljf
 
 DB_CONNECTION=mysql
-DB_HOST=localhost
+DB_HOST=127.0.0.1
 DB_PORT=3306
 DB_DATABASE=homestead
 DB_USERNAME=homestead
