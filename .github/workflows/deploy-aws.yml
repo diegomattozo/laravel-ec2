@@ -25,3 +25,17 @@ jobs:
         run: |
           npm install
           npm run build
+          
+      - uses: mirromutth/mysql-action@v1.1
+        with:
+          mysql version: '8.0' 
+          mysql database: 'laravel' 
+          mysql root password: '123'
+          mysql user: 'laravel'
+          mysql password: 'secret'
+
+      - name: Run migrations
+        run: |
+          ln -s -f .env.workflow .env
+          php artisan migrate --no-interaction
+          php artisan key:generate
