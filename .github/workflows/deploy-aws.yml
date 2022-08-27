@@ -33,7 +33,7 @@ jobs:
       
       - name: Composer install
         run: |
-          composer install --no-dev --no-interaction --prefer-dist  
+          composer install --no-interaction --prefer-dist  
           chmod -R 777 storage bootstrap/cache      
 
       - name: Compile CSS and Javascript
