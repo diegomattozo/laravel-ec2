@@ -41,11 +41,9 @@ jobs:
           npm install
           npm run build
           
-      - name: Run migrations 
+      - name: Run migrations & Unit test
         run: |
           php -r "file_exists('.env') || copy('.env.workflow', '.env');"
           php artisan migrate --no-interaction
           php artisan key:generate
-
-      - name: Run Testsuite
-        run: ./vendor/bin/phpunit tests/          
+          ./vendor/bin/phpunit tests/      
