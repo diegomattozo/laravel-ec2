@@ -46,3 +46,6 @@ jobs:
           php -r "file_exists('.env') || copy('.env.workflow', '.env');"
           php artisan migrate --no-interaction
           php artisan key:generate
+
+      - name: Run Testsuite
+        run: vendor/bin/phpunit tests/          
