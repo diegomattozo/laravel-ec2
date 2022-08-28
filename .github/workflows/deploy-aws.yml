@@ -59,7 +59,7 @@ jobs:
           aws s3 cp $BUNDLE $S3_ENDPOINT
 
           echo "[-] Your CodeDeploy S3 endpoint will be: $S3_ENDPOINT"
-          aws deploy create-deployment --application-name ${{ secrets.APPLICATION_NAME }} --deployment-config-name ${{ secrets.DEPLOYMENT_CONFIG_NAME }} --deployment-group-name ${{ secrets.DEPLOYMENT_GROUP_NAME }} --file-exists-behavior OVERWRITE --s3-location $bucket=${{ secrets.S3_BUCKET }},bundleType=tgz,key=bundles/$BUNDLE
+          aws deploy create-deployment --application-name ${{ secrets.APPLICATION_NAME }} --deployment-config-name ${{ secrets.DEPLOYMENT_CONFIG_NAME }} --deployment-group-name ${{ secrets.DEPLOYMENT_GROUP_NAME }} --file-exists-behavior OVERWRITE --s3-location bucket=${{ secrets.S3_BUCKET }},bundleType=tgz,key=bundles/$BUNDLE
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
