@@ -2,7 +2,7 @@ version: 0.0
 os: linux
 files:
   - source: /
-  - destination: /var/www/website
+    destination: /var/www/website
 hooks:
   AfterInstall:
     - location: ./devops/hooks/after-install.sh
