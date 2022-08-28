@@ -10,6 +10,7 @@ sudo chmod -R u+x .
 sudo chmod -R g+w storage
 
 sudo -u $WEB_USER composer install --no-dev --no-progress --prefer-dist
+./devops/scripts/generate-env.sh
 sudo -u $WEB_USER php artisan key:generate
 sudo -u $WEB_USER php artisan migrate --no-interaction --force
 
